@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 
 class IndexController extends Controller
 {
@@ -13,6 +14,10 @@ class IndexController extends Controller
      */
     public function index()
     {
+        $user = User::find(1);
+        $user->name = fake()->name;
+        $user->save();
+
         $category = Category::findOrFail(1);
         $products = $category->products()->orderByDesc('price')->get();
 
